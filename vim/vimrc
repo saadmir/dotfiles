@@ -69,12 +69,6 @@ hi ColorColumn ctermbg=black guibg=black
 autocmd InsertLeave * set nocursorline
 autocmd InsertEnter * set cursorline
 
-set list                            " show hidden characters
-set listchars=tab:\ \ ,trail:·      " show · for trailing space, \ \ for trailing tab
-"set listchars=tab:▸\ ,eol:¬
-set listchars=extends:>
-set listchars+=precedes:<
-
 
 set spelllang=en,es                 " set spell check language
 set noeb vb t_vb=                   " disable audio and visual bells
@@ -92,8 +86,10 @@ vnoremap <Space> zf
 
 "navigation
 "between tabs
-nnoremap <S-Right> gt
-nnoremap <S-Left> gT 
+nnoremap <leader>l gt
+nnoremap <leader>j gt
+nnoremap <leader>k gT 
+nnoremap <leader>h gT 
 
 "left panel for openning NERDTree"
 nnoremap <silent><leader>n :NERDTreeToggle<cr>
@@ -149,8 +145,6 @@ set guioptions-=L
 set guioptions-=l
 set guioptions+=R
 
-" strip all trailing whitespace in the current file
-nnoremap <leader>W :%s/\s\+$//e<cr>:let @/=''<CR>
 
 " insert path of current file into a command
 cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
@@ -171,13 +165,46 @@ vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
 " all my .tpl files ARE html
-au BufNewFile,BufRead *.tpl :set ft=html
+au BufNewFile,BufRead *.tpl     :set ft=html
+
+" .mu .hogan .hjs files are .mustache files 
+au BufNewFile,BufRead *.hjs     :set ft=mustache
+au BufNewFile,BufRead *.mu      :set ft=mustache
+au BufNewFile,BufRead *.hogan   :set ft=mustache
 
 " JavaScript
 au BufRead,BufNewFile *.json set ft=javascript
 
 " au BufRead,BufNewFile *.php set indentexpr= | set smartindent
 au BufRead,BufNewFile *.phps set filetype=php
+
+
+set listchars=tab:\ \ ,trail:·      " show · for trailing space, \ \ for trailing tab
+"set listchars=tab:▸\ ,eol:¬
+set listchars=extends:>
+set listchars+=precedes:<
+set list                            " show hidden characters
+
+" **whitespace highlighting and stripping
+"highlight trailing white spaces
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+function TrimTrailingWhiteSpaces()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+:endfunction
+
+autocmd FileWritePre * :call TrimTrailingWhiteSpaces()
+autocmd FileAppendPre * :call TrimTrailingWhiteSpaces()
+autocmd FilterWritePre * :call TrimTrailingWhiteSpaces()
+autocmd BufWritePre * :call TrimTrailingWhiteSpaces()
 
 "" STATUS LINE
 let g:Powerline_stl_path_style = 'full'
@@ -220,15 +247,6 @@ function! FileSize()
     endif
 endfunction
 
-"function TrimWhiteSpace()
-"  %s/\s*$//
-"  ''
-":endfunction
-
-"autocmd FileWritePre * :call TrimWhiteSpace()
-"autocmd FileAppendPre * :call TrimWhiteSpace()
-"autocmd FilterWritePre * :call TrimWhiteSpace()
-"autocmd BufWritePre * :call TrimWhiteSpace()
 
 "autocmd BufWritePost,FileWritePost *.js !jshint <afile>
 
