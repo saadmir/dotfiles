@@ -13,8 +13,8 @@ hi Blue     ctermfg=68          ctermbg=NONE        cterm=NONE
 hi Green    ctermfg=107         ctermbg=NONE        cterm=NONE
 hi Orange   ctermfg=214         ctermbg=NONE        cterm=NONE
 hi Peach    ctermfg=222         ctermbg=NONE        cterm=NONE
-hi Pink     ctermfg=205         ctermbg=NONE        cterm=NONE
-hi Pink2    ctermfg=211         ctermbg=NONE        cterm=NONE
+"hi Pink     ctermfg=205         ctermbg=NONE        cterm=NONE
+"hi Pink2    ctermfg=211         ctermbg=NONE        cterm=NONE
 hi Purple   ctermfg=153         ctermbg=NONE        cterm=NONE
 hi Purple2  ctermfg=164         ctermbg=NONE        cterm=NONE
 hi Red      ctermfg=203         ctermbg=NONE        cterm=NONE
@@ -65,14 +65,14 @@ hi Todo           ctermfg=232         ctermbg=220         cterm=NONE
 
 " JavaScript: {
 " Other
-hi link javaScriptSpecial               Pink
+"hi link javaScriptSpecial               Pink
 hi link javaScriptFloat                 Red
 
 " Browser/DOM
-hi link javaScriptHtmlEvents            Pink2
+"hi link javaScriptHtmlEvents            Pink2
 hi link javaScriptDomElemAttrs          Purple
 hi link javaScriptHtmlElemAttrs         Purple
-hi link javaScriptHtmlElemFuncs         Pink
+"hi link javaScriptHtmlElemFuncs         Pink
 hi link javaScriptCssStyles             Purple
 
 " JSDoc
@@ -82,7 +82,7 @@ hi link javaScriptDocParam        Silver
 
 " JavaScript
 "syntax keyword javaScriptPrototype      prototype
-hi link javaScriptPrototype       Pink2
+"hi link javaScriptPrototype       Pink2
 "syntax keyword javaScriptSource         import export
 hi link javaScriptSource          Red
 "syntax keyword javaScriptType           const undefined var void yield
@@ -111,7 +111,7 @@ hi link javaScriptFutureKeys      Black
 "  }
 
 " PHP: {
-hi link phpFunctions          Pink
+"hi link phpFunctions          Pink
 " }
 
 " HTML: {
@@ -124,20 +124,20 @@ hi link pythonPreCondit       Blue
 " }
 
 " CSS_LESS: {
-hi link lessVariable      Blue
-hi link lessFunction      Purple
-hi link lessFuncDef       Purple
-hi link cssBraces         Peach
-hi link cssTagName        Orange
-hi link cssClassName      Peach
-hi link cssCommonAttr     Pink
-hi link cssFontAttr       Pink
-hi link cssTextAttr       Pink
-hi link cssBoxAttr        Pink
-hi link cssColorAttr      Pink
-hi link cssRenderAttr     Pink
-hi link cssTableAttr      Pink
-hi link cssAuralAttr      Pink
-hi link cssUIAttr         Pink
-hi link cssGeneratedContentAttr      Pink
+"hi link lessVariable      Blue
+"hi link lessFunction      Purple
+"hi link lessFuncDef       Purple
+"hi link cssBraces         Peach
+"hi link cssTagName        Orange
+"hi link cssClassName      Peach
+"hi link cssCommonAttr     Pink
+"hi link cssFontAttr       Pink
+"hi link cssTextAttr       Pink
+"hi link cssBoxAttr        Pink
+"hi link cssColorAttr      Pink
+"hi link cssRenderAttr     Pink
+"hi link cssTableAttr      Pink
+"hi link cssAuralAttr      Pink
+"hi link cssUIAttr         Pink
+"hi link cssGeneratedContentAttr      Pink
 "}

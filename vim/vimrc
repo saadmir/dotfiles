@@ -76,26 +76,28 @@ set noeb vb t_vb=                   " disable audio and visual bells
 set formatoptions=qrn1
 
 " FOLDING
-set nofoldenable                " disable folding
-"set foldenable                  " enable folding
-"set foldmethod=indent           " most files are evenly indented
-"set foldlevel=99
+"set nofoldenable                " disable folding
+" set foldenable                  " enable folding
+" set foldmethod=syntax           " most files are evenly indented
+" set foldlevel=99
 "press Space to toggle the current fold open/closed. However, if the cursor is not in a fold, move to the right (the default behavior)
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
 vnoremap <Space> zf
+"let javaScript_fold=1
+
 
 "navigation
 "between tabs
 nnoremap <leader>l gt
 nnoremap <leader>j gt
-nnoremap <leader>k gT 
-nnoremap <leader>h gT 
+nnoremap <leader>k gT
+nnoremap <leader>h gT
 
 "left panel for openning NERDTree"
-nnoremap <silent><leader>n :NERDTreeToggle<cr>
+"nnoremap <silent><leader>n :NERDTreeToggle<cr>
 nnoremap <silent> <F10> :NERDTreeToggle<cr>
 inoremap <silent> <F10> :NERDTreeToggle<cr>
-inoremap <silent><leader>n :NERDTreeToggle<cr>
+"inoremap <silent><leader>n :NERDTreeToggle<cr>
 
 "an additional key mapping for pressing ESCAPE key
 inoremap jj <ESC>
@@ -167,7 +169,7 @@ vmap <C-Down> ]egv
 " all my .tpl files ARE html
 au BufNewFile,BufRead *.tpl     :set ft=html
 
-" .mu .hogan .hjs files are .mustache files 
+" .mu .hogan .hjs files are .mustache files
 au BufNewFile,BufRead *.hjs     :set ft=mustache
 au BufNewFile,BufRead *.mu      :set ft=mustache
 au BufNewFile,BufRead *.hogan   :set ft=mustache
@@ -248,7 +250,11 @@ function! FileSize()
 endfunction
 
 
-"autocmd BufWritePost,FileWritePost *.js !jshint <afile>
+autocmd BufWritePost,FileWritePost *.js !jshint <afile>
+inoremap <silent><leader>n :lnext<cr>
+inoremap <silent><leader>p :lprev<cr>
+nnoremap <silent><leader>n :lnext<cr>
+nnoremap <silent><leader>p :lprev<cr>
 
 " Rename tabs to show tab number.
 " (Based on http://stackoverflow.com/questions/5927952/whats-implementation-of-vims-default-tabline-function)
