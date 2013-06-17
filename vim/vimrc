@@ -250,7 +250,8 @@ function! FileSize()
 endfunction
 
 
-autocmd BufWritePost,FileWritePost *.js !jshint <afile>
+"autocmd BufWritePost,FileWritePost *.js !jshint <afile>
+inoremap <silent> <F9> :JSHint <cr>
 inoremap <silent><leader>n :lnext<cr>
 inoremap <silent><leader>p :lprev<cr>
 nnoremap <silent><leader>n :lnext<cr>
