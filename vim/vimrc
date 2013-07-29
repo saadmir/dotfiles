@@ -8,11 +8,12 @@ filetype plugin indent on
 noremap , \
 let mapleader = ","
 
+set t_Co=256
+
 " syntax highlighting
 syntax on
-color mango
+color xoria256
 
-set t_Co=256
 set autochdir
 
 set scrolloff=3                     " show 3 lines of context around the cursor
@@ -226,8 +227,13 @@ function! FileSize()
 endfunction
 
 
+<<<<<<< Updated upstream
 "autocmd BufWritePost,FileWritePost *.js !jshint <afile>
 inoremap <silent> <F9> :JSHint <cr>
+=======
+" autocmd BufWritePost,FileWritePost *.js !jshint <afile>
+nnoremap <silent> <F9> :JSHint <cr>
+>>>>>>> Stashed changes
 inoremap <silent><leader>n :lnext<cr>
 inoremap <silent><leader>p :lprev<cr>
 nnoremap <silent><leader>n :lnext<cr>
@@ -295,6 +301,15 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
 
+"let g:nodejs_complete_config = {
+    "\  'js_compl_fn': 'jscomplete#CompleteJS',
+    "\  'max_node_compl_len': 15
+    "\}
+"autocmd FileType javascript
+  "\ :setl omnifunc=jscomplete#CompleteJS
+
+au FileType javascript set dictionary+=$HOME/.vim/dict/vim-node/dict/node.dict
+highlight Pmenu ctermfg=yellow ctermbg=darkgreen
 
 "jsbeautifer related
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
