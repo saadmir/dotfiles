@@ -12,6 +12,14 @@ let mapleader = ","
 
 " syntax highlighting
 syntax on
+color mango
+set background=dark
+
+"selections color to be light purple with white text
+hi Visual       ctermfg=255     guifg=#eeeeee   ctermbg=96    guibg=#875f87
+
+"search results color light green
+hi Search       ctermfg=0   guifg=#000000 ctermbg=149 guibg=#afdf5f
 
 set autochdir
 
@@ -190,7 +198,7 @@ set list                            " show hidden characters
 
 " **whitespace highlighting and stripping
 "highlight trailing white spaces
-highlight ExtraWhitespace ctermbg=red guibg=red
+highlight ExtraWhitespace ctermbg=7 guibg=7
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
@@ -227,7 +235,7 @@ endfunction
 
 
 "autocmd BufWritePost,FileWritePost *.js !jshint <afile>
-inoremap <silent> <F9> :JSHint <cr>
+inoremap <silent> <F9> :JSHint<cr>
 inoremap <silent><leader>n :lnext<cr>
 inoremap <silent><leader>p :lprev<cr>
 nnoremap <silent><leader>n :lnext<cr>
@@ -295,16 +303,6 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
 
-"let g:nodejs_complete_config = {
-    "\  'js_compl_fn': 'jscomplete#CompleteJS',
-    "\  'max_node_compl_len': 15
-    "\}
-"autocmd FileType javascript
-  "\ :setl omnifunc=jscomplete#CompleteJS
-
-au FileType javascript set dictionary+=$HOME/.vim/dict/vim-node/dict/node.dict
-highlight Pmenu ctermfg=yellow ctermbg=darkgreen
-
 "jsbeautifer related
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 " for html
@@ -317,6 +315,17 @@ set clipboard=unnamed
 "avoiding annoying CSApprox warning message
 let g:CSApprox_verbose_level = 0
 
-color mango
-set background=dark
+let g:syntastic_javascript_checkers = ['jshint']
+"let g:nodejs_complete_config = {
+    "\  'js_compl_fn': 'jscomplete#CompleteJS',
+    "\  'max_node_compl_len': 15
+    "\}
+"autocmd FileType javascript
+  "\ :setl omnifunc=jscomplete#CompleteJS
+
+au FileType javascript set dictionary+=$HOME/.vim/dict/vim-node/dict/node.dict
+highlight Pmenu                                 ctermfg=Black       ctermbg=DarkGray
+highlight PmenuSel                              ctermfg=White       ctermbg=DarkGray
+highlight SyntasticError                        ctermfg=White       ctermbg=DarkGray
+highlight MatchParen                            ctermfg=Red         ctermbg=NONE
 
