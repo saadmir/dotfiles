@@ -8,11 +8,10 @@ filetype plugin indent on
 noremap , \
 let mapleader = ","
 
-set t_Co=256
+"set t_Co=256
 
 " syntax highlighting
 syntax on
-color xoria256
 
 set autochdir
 
@@ -317,4 +316,7 @@ set clipboard=unnamed
 
 "avoiding annoying CSApprox warning message
 let g:CSApprox_verbose_level = 0
+
+color mango
+set background=dark
 
