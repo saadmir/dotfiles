@@ -315,3 +315,6 @@ autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
 set clipboard=unnamed
 
+"avoiding annoying CSApprox warning message
+let g:CSApprox_verbose_level = 0
+
