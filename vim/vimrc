@@ -59,7 +59,7 @@ set textwidth=0
 set nowrap
 
 set smarttab
-set autoindent                      " set automatic code indentation
+"set autoindent                      " set automatic code indentation
 set hidden                          " allow background buffers w/out writing
 
 set cursorline                      " highlight current line
@@ -282,10 +282,10 @@ if exists("+showtabline")
     set showtabline=2
     set tabline=%!MyTabLine()
     set showtabline=1
-    highlight TabNum      ctermfg=240 ctermbg=NONE cterm=NONE
-    highlight TabLineFill ctermfg=240 ctermbg=NONE cterm=NONE
-    highlight TabLine     ctermfg=240 ctermbg=NONE cterm=NONE
-    highlight TabLineSel  ctermfg=255 ctermbg=NONE cterm=NONE
+    highlight TabNum      ctermfg=255 ctermbg=NONE cterm=NONE
+    highlight TabLineFill ctermfg=255 ctermbg=NONE cterm=NONE
+    highlight TabLine     ctermfg=255 ctermbg=NONE cterm=NONE
+    highlight TabLineSel  ctermfg=Blue ctermbg=NONE cterm=NONE
 endif
 
 set guitablabel=%N/\ %t\ %M
@@ -317,4 +317,6 @@ autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 " for css or scss
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+
+set clipboard=unnamed
 

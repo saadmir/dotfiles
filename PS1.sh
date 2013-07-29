@@ -1,7 +1,7 @@
 #!/bin/bash
 
 case "$TERM" in
-  xterm*|rxvt*) SHOW_COLORED_PROMPT=yes;;
+  xterm*|rxvt*|*256*) SHOW_COLORED_PROMPT=yes;;
 esac
 
 if [ $SHOW_COLORED_PROMPT = "yes" ] ; then
