@@ -227,13 +227,8 @@ function! FileSize()
 endfunction
 
 
-<<<<<<< Updated upstream
 "autocmd BufWritePost,FileWritePost *.js !jshint <afile>
 inoremap <silent> <F9> :JSHint <cr>
-=======
-" autocmd BufWritePost,FileWritePost *.js !jshint <afile>
-nnoremap <silent> <F9> :JSHint <cr>
->>>>>>> Stashed changes
 inoremap <silent><leader>n :lnext<cr>
 inoremap <silent><leader>p :lprev<cr>
 nnoremap <silent><leader>n :lnext<cr>
