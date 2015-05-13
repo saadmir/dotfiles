@@ -8,18 +8,11 @@ filetype plugin indent on
 noremap , \
 let mapleader = ","
 
-"set t_Co=256
+set t_Co=256
 
 " syntax highlighting
 syntax on
-color mango
-set background=dark
-
-"selections color to be light purple with white text
-hi Visual       ctermfg=255     guifg=#eeeeee   ctermbg=96    guibg=#875f87
-
-"search results color light green
-hi Search       ctermfg=0   guifg=#000000 ctermbg=149 guibg=#afdf5f
+color xoria256
 
 set autochdir
 
@@ -66,7 +59,7 @@ set textwidth=0
 set nowrap
 
 set smarttab
-"set autoindent                      " set automatic code indentation
+set autoindent                      " set automatic code indentation
 set hidden                          " allow background buffers w/out writing
 
 set cursorline                      " highlight current line
@@ -198,7 +191,7 @@ set list                            " show hidden characters
 
 " **whitespace highlighting and stripping
 "highlight trailing white spaces
-highlight ExtraWhitespace ctermbg=7 guibg=7
+highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
@@ -233,16 +226,10 @@ function! FileSize()
     endif
 endfunction
 
-<<<<<<< HEAD
 "autocmd BufWritePost,FileWritePost *.js !jshint <afile>
 "inoremap <silent> <F9> :JSHint <cr>
 "nnoremap <silent> <F9> :JSHint <cr>
 
-=======
-
-"autocmd BufWritePost,FileWritePost *.js !jshint <afile>
-inoremap <silent> <F9> :JSHint<cr>
->>>>>>> d2fcda7b0bb3ad1a97f043ca8846457a49e02567
 inoremap <silent><leader>n :lnext<cr>
 inoremap <silent><leader>p :lprev<cr>
 nnoremap <silent><leader>n :lnext<cr>
@@ -291,10 +278,10 @@ if exists("+showtabline")
     set showtabline=2
     set tabline=%!MyTabLine()
     set showtabline=1
-    highlight TabNum      ctermfg=255 ctermbg=NONE cterm=NONE
-    highlight TabLineFill ctermfg=255 ctermbg=NONE cterm=NONE
-    highlight TabLine     ctermfg=255 ctermbg=NONE cterm=NONE
-    highlight TabLineSel  ctermfg=Blue ctermbg=NONE cterm=NONE
+    highlight TabNum      ctermfg=240 ctermbg=NONE cterm=NONE
+    highlight TabLineFill ctermfg=240 ctermbg=NONE cterm=NONE
+    highlight TabLine     ctermfg=240 ctermbg=NONE cterm=NONE
+    highlight TabLineSel  ctermfg=255 ctermbg=NONE cterm=NONE
 endif
 
 set guitablabel=%N/\ %t\ %M
@@ -310,19 +297,6 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
 
-"jsbeautifer related
-autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-" for html
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-" for css or scss
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-
-set clipboard=unnamed
-
-"avoiding annoying CSApprox warning message
-let g:CSApprox_verbose_level = 0
-
-let g:syntastic_javascript_checkers = ['jshint']
 "let g:nodejs_complete_config = {
     "\  'js_compl_fn': 'jscomplete#CompleteJS',
     "\  'max_node_compl_len': 15
@@ -331,10 +305,14 @@ let g:syntastic_javascript_checkers = ['jshint']
   "\ :setl omnifunc=jscomplete#CompleteJS
 
 au FileType javascript set dictionary+=$HOME/.vim/dict/vim-node/dict/node.dict
-highlight Pmenu                                 ctermfg=Black       ctermbg=DarkGray
-highlight PmenuSel                              ctermfg=White       ctermbg=DarkGray
-highlight SyntasticError                        ctermfg=White       ctermbg=DarkGray
-highlight MatchParen                            ctermfg=Red         ctermbg=NONE
+highlight Pmenu ctermfg=yellow ctermbg=darkgreen
+
+"jsbeautifer related
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+" for html
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+" for css or scss
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
 " [04/21/2015] added for syntastic
 set statusline+=%#warningmsg#
