@@ -72,7 +72,7 @@ autocmd InsertEnter * set cursorline
 
 
 set spelllang=en,es                 " set spell check language
-set noeb vb t_vb=                   " disable audio and visual bells
+set noeb novb t_vb=                   " disable audio and visual bells
 
 set formatoptions=qrn1
 
@@ -98,7 +98,7 @@ nnoremap <leader>h gT
 "nnoremap <silent><leader>n :NERDTreeToggle<cr>
 nnoremap <silent> <F10> :NERDTreeToggle<cr>
 noremap <silent> <F10> :NERDTreeToggle<cr>
-let NERDTreeShowHidden=1
+"let NERDTreeShowHidden=1
 "inoremap <silent><leader>n :NERDTreeToggle<cr>
 
 "an additional key mapping for pressing ESCAPE key
@@ -226,14 +226,10 @@ function! FileSize()
     endif
 endfunction
 
-
-<<<<<<< Updated upstream
 "autocmd BufWritePost,FileWritePost *.js !jshint <afile>
-inoremap <silent> <F9> :JSHint <cr>
-=======
-" autocmd BufWritePost,FileWritePost *.js !jshint <afile>
-nnoremap <silent> <F9> :JSHint <cr>
->>>>>>> Stashed changes
+"inoremap <silent> <F9> :JSHint <cr>
+"nnoremap <silent> <F9> :JSHint <cr>
+
 inoremap <silent><leader>n :lnext<cr>
 inoremap <silent><leader>p :lprev<cr>
 nnoremap <silent><leader>n :lnext<cr>
@@ -317,4 +313,25 @@ autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 " for css or scss
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+
+" [04/21/2015] added for syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+"nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+"inoremap <silent> <F9> :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+inoremap <silent><F9> :SyntasticCheck<CR> :lclose<CR>
+nnoremap <silent><F9> :SyntasticCheck<CR> :lclose<CR>
+
+inoremap <silent><c-Down> :lnext<cr>
+inoremap <silent><c-Up> :lprevious<cr>
+nnoremap <silent><c-Down> :lnext<cr>
+nnoremap <silent><c-Up> :lprevious<cr>
 

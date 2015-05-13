@@ -318,7 +318,7 @@ fun! s:LoadPlugin()
     call s:SaveGlobalFocus()
   end
 
-  autocmd VimEnter * call <SID>VimEnterHandler()
+  "autocmd VimEnter * call <SID>VimEnterHandler()
   autocmd TabEnter * call <SID>TabEnterHandler()
   autocmd TabLeave * call <SID>TabLeaveHandler()
   autocmd WinEnter * call <SID>WinEnterHandler()
