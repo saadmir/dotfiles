@@ -182,13 +182,6 @@ au BufRead,BufNewFile *.json set ft=javascript
 " au BufRead,BufNewFile *.php set indentexpr= | set smartindent
 au BufRead,BufNewFile *.phps set filetype=php
 
-
-set listchars=tab:\ \ ,trail:·      " show · for trailing space, \ \ for trailing tab
-"set listchars=tab:▸\ ,eol:¬
-set listchars=extends:>
-set listchars+=precedes:<
-set list                            " show hidden characters
-
 " **whitespace highlighting and stripping
 "highlight trailing white spaces
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -211,7 +204,7 @@ autocmd FilterWritePre * :call TrimTrailingWhiteSpaces()
 autocmd BufWritePre * :call TrimTrailingWhiteSpaces()
 
 "" STATUS LINE
-let g:Powerline_stl_path_style = 'full'
+"let g:Powerline_stl_path_style = 'full'
 set laststatus=2  " always show status line
 
 function! FileSize()
@@ -317,6 +310,7 @@ autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 " [04/21/2015] added for syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+='%F'
 set statusline+=%*
 
 let g:syntastic_aggregate_errors = 1
@@ -335,3 +329,17 @@ inoremap <silent><c-Up> :lprevious<cr>
 nnoremap <silent><c-Down> :lnext<cr>
 nnoremap <silent><c-Up> :lprevious<cr>
 
+nnoremap <silent> <Tab> :NERDTreeToggle<cr>
+noremap <silent> <Tab> :NERDTreeToggle<cr>
+
+set listchars=tab:▸\ ,trail:·      " show · for trailing space, \ \ for trailing tab
+"set listchars=tab:\ \ ,trail:·    " show · for trailing space, \ \ for trailing tab
+"set listchars=tab:▸\ ,eol:¬
+set listchars+=extends:>
+set listchars+=precedes:<
+set list                            " show hidden characters
+
+let g:airline_section_c = '%F'
+"let g:airline#extensions#tabline#enabled = 1
+
+set clipboard=unnamed
