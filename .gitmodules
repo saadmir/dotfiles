@@ -16,9 +16,6 @@
 [submodule "vim/bundle/tabular"]
 	path = vim/bundle/tabular
 	url = https://github.com/saadmir/tabular.git
-[submodule "vim/bundle/ag.vim"]
-	path = vim/bundle/ag.vim
-	url = https://github.com/saadmir/ag.vim.git
 [submodule "vim/bundle/tagbar"]
 	path = vim/bundle/tagbar
 	url = https://github.com/saadmir/tagbar.git
