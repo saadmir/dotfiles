@@ -297,8 +297,8 @@ let g:ctrlp_prompt_mappings = {
 "autocmd FileType javascript
   "\ :setl omnifunc=jscomplete#CompleteJS
 
-au FileType javascript set dictionary+=$HOME/.vim/dict/vim-node/dict/node.dict
-highlight Pmenu ctermfg=yellow ctermbg=darkgreen
+"au FileType javascript set dictionary+=$HOME/.vim/dict/vim-node/dict/node.dict
+"highlight Pmenu ctermfg=yellow ctermbg=darkgreen
 
 "jsbeautifer related
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
@@ -342,4 +342,6 @@ set list                            " show hidden characters
 let g:airline_section_c = '%F'
 "let g:airline#extensions#tabline#enabled = 1
 
+" autocompelte popup background dark grey, text in yellow
+highlight Pmenu ctermbg=238 ctermfg=226
 set clipboard=unnamed
