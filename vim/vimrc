@@ -67,8 +67,8 @@ set cursorline                      " highlight current line
 "hi ColorColumn ctermbg=black guibg=black
 
 "Higlight current line only in insert mode
-autocmd InsertLeave * set nocursorline
-autocmd InsertEnter * set cursorline
+"autocmd InsertLeave * set nocursorline
+"autocmd InsertEnter * set cursorline
 
 
 set spelllang=en,es                 " set spell check language
@@ -78,13 +78,14 @@ set formatoptions=qrn1
 
 " FOLDING
 "set nofoldenable                " disable folding
-" set foldenable                  " enable folding
-" set foldmethod=syntax           " most files are evenly indented
+set foldenable                  " enable folding
+set foldmethod=syntax           " most files are evenly indented
 " set foldlevel=99
 "press Space to toggle the current fold open/closed. However, if the cursor is not in a fold, move to the right (the default behavior)
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
+nnoremap <silent> <Space><Space> zR<CR>
 vnoremap <Space> zf
-"let javaScript_fold=1
+let javaScript_fold=1
 
 
 "navigation
@@ -191,12 +192,15 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
-function TrimTrailingWhiteSpaces()
-  let l = line(".")
-  let c = col(".")
-  %s/\s\+$//e
-  call cursor(l, c)
-:endfunction
+if exists("*TrimTrailingWhiteSpaces")
+else
+  function TrimTrailingWhiteSpaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+  :endfunction
+endif
 
 autocmd FileWritePre * :call TrimTrailingWhiteSpaces()
 autocmd FileAppendPre * :call TrimTrailingWhiteSpaces()
@@ -338,10 +342,12 @@ set listchars=tab:▸\ ,trail:·      " show · for trailing space, \ \ for trai
 set listchars+=extends:>
 set listchars+=precedes:<
 set list                            " show hidden characters
+" set color of hidden characters to grey
+hi SpecialKey ctermfg=238 guifg=238
 
 let g:airline_section_c = '%F'
 "let g:airline#extensions#tabline#enabled = 1
 
-" autocompelte popup background dark grey, text in yellow
+" autocompelte popup background grey, text in yellow
 highlight Pmenu ctermbg=238 ctermfg=226
 set clipboard=unnamed

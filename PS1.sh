@@ -7,12 +7,17 @@ esac
 if [ $SHOW_COLORED_PROMPT = "yes" ] ; then
   MY_PS1=""
   MY_USERNAME=`whoami | awk '{print tolower($0)}'`
-  MY_IP=`ipconfig getifaddr en0`
+
+  HAS_IPCONFIG=`command -v ipconfig`;
+  if [ -n "$HAS_IPCONFIG" ] ; then
+    MY_IP=`ipconfig getifaddr en0`
+  fi
+
   MY_HOSTNAME=`echo $HOSTNAME | awk -F'.' '{print tolower($1)}'`
   MY_SSH_CLIENT=`echo $SSH_CLIENT | awk '{print $1}'`
 
   if [ -n "$MY_SSH_CLIENT" ] ; then
-    MY_HOSTNAME="${MY_SSH_CLIENT}"
+    MY_HOSTNAME="${MY_HOSTNAME}"
   else
     if [ -n "$MY_IP" ] ; then
       MY_HOSTNAME="${MY_IP}"
