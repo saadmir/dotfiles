@@ -50,10 +50,6 @@ set noswapfile
 set numberwidth=3
 set number
 
-set shiftwidth=2                    " set tab width
-set softtabstop=2
-set tabstop=2
-
 set et
 set textwidth=0
 set nowrap
@@ -223,15 +219,6 @@ function! FileSize()
     endif
 endfunction
 
-"autocmd BufWritePost,FileWritePost *.js !jshint <afile>
-"inoremap <silent> <F9> :JSHint <cr>
-"nnoremap <silent> <F9> :JSHint <cr>
-
-inoremap <silent><leader>n :lnext<cr>
-inoremap <silent><leader>p :lprev<cr>
-nnoremap <silent><leader>n :lnext<cr>
-nnoremap <silent><leader>p :lprev<cr>
-
 " Rename tabs to show tab number.
 " (Based on http://stackoverflow.com/questions/5927952/whats-implementation-of-vims-default-tabline-function)
 if exists("+showtabline")
@@ -311,6 +298,15 @@ autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 " for css or scss
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
+"autocmd BufWritePost,FileWritePost *.js !jshint <afile>
+"inoremap <silent> <F9> :JSHint <cr>
+"nnoremap <silent> <F9> :JSHint <cr>
+
+inoremap <silent><leader>n :lnext<cr>
+inoremap <silent><leader>p :lprev<cr>
+nnoremap <silent><leader>n :lnext<cr>
+nnoremap <silent><leader>p :lprev<cr>
+
 " [04/21/2015] added for syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -325,6 +321,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 "nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 "inoremap <silent> <F9> :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+let g:syntastic_javascript_checkers = ['jshint', 'jscs']
 inoremap <silent><F9> :SyntasticCheck<CR> :lclose<CR>
 nnoremap <silent><F9> :SyntasticCheck<CR> :lclose<CR>
 
@@ -350,4 +347,12 @@ let g:airline_section_c = '%F'
 
 " autocompelte popup background grey, text in yellow
 highlight Pmenu ctermbg=238 ctermfg=226
+
+set shiftwidth=2                    " set tab width
+set softtabstop=2
+set tabstop=2
+set noexpandtab
+
+let g:nerdtree_tabs_open_on_gui_startup = 0
+
 set clipboard=unnamed

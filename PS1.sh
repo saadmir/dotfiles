@@ -27,5 +27,3 @@ if [ $SHOW_COLORED_PROMPT = "yes" ] ; then
   export PS1="\[\e[0;32m\][${MY_USERNAME}@${MY_HOSTNAME}]:\[\e[0m\] \[\e[0;33m\]\w\[\e[0m\] $ "
   export SUDO_PS1="\[\e[0;31m\][${MY_USERNAME}@${MY_HOSTNAME}]:\[\e[0m\] \[\e[0;33m\]\w\[\e[0m\] # "
 fi
-
-alias ls='ls --color=auto'
