@@ -1,6 +1,15 @@
 #!/bin/bash
 
-alias ls='ls --color=auto'
+case $OSTYPE in
+  darwin*)
+    alias ls='ls -GFh'
+    ;;
+  linux*)
+    alias ls='ls --color=auto'
+    ;;
+esac
+
+
 alias ttmux='tmux new-session -A -s saad'
 
 if [ -d "$HOME/dotfiles" ] ; then
