@@ -358,3 +358,6 @@ let g:nerdtree_tabs_open_on_gui_startup = 0
 set t_ut=
 
 set clipboard=unnamed
+
+set completeopt-=preview
+
