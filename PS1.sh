@@ -8,10 +8,34 @@ if [ $SHOW_COLORED_PROMPT = "yes" ] ; then
   MY_PS1=""
   MY_USERNAME=`whoami | awk '{print tolower($0)}'`
 
-  HAS_IPCONFIG=`command -v ipconfig`;
-  if [ -n "$HAS_IPCONFIG" ] ; then
-    MY_IP=`ipconfig getifaddr en0`
-  fi
+	if [ -n $(command -v ip) ] ; then
+		export WAN_IP=`ip route get 8.8.8.8 | awk 'NR==1 {print $NF}'`;
+	fi
+	if [ -z "${WAN_IP}" ] && [ -n $(command -v ipconfig) ] ; then
+		export WAN_IP=`ipconfig getifaddr en0`;
+	fi
+
+
+	if [ -n $(command -v networksetup) ] ; then
+		INTERFACES_=`networksetup -listallhardwareports`;
+		while read -r line
+		do
+			INTERFACE_=`echo "${line}" | grep "Device: " | sed -e "s/Device\://g" | tr -d ' '` ;
+			if [ -n "${INTERFACE_}" ] ; then
+				IP_=`ipconfig getifaddr ${INTERFACE_}`;
+				if [ -n "${IP_}" ] ; then
+					export LAN_IP="${IP_}";
+				fi
+			fi
+		done <<<"${INTERFACES_}"
+	fi
+
+	echo "WAN_IP: ${WAN_IP}";
+	echo "LAN_IP: ${LAN_IP}";
+
+	if [ -n "${WAN_IP}" ] ; then MY_IP="${WAN_IP}"; fi
+	if [ -n "${LAN_IP}" ] ; then MY_IP="${LAN_IP}"; fi
+
 
   MY_HOSTNAME=`echo $HOSTNAME | awk -F'.' '{print tolower($1)}'`
   MY_SSH_CLIENT=`echo $SSH_CLIENT | awk '{print $1}'`
