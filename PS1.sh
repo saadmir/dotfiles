@@ -53,7 +53,8 @@ if [ $SHOW_COLORED_PROMPT = "yes" ] ; then
   MY_SSH_CLIENT=`echo $SSH_CLIENT | awk '{print $1}'`
 
   if [ -n "$MY_SSH_CLIENT" ] ; then
-    MY_HOSTNAME="${MY_HOSTNAME}"
+    MY_HOSTNAME="${MY_HOSTNAME}[SSH]"
+		echo "this is ssh"
   else
     if [ -n "$MY_IP" ] ; then
       MY_HOSTNAME="${MY_IP}"
