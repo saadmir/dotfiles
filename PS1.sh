@@ -52,17 +52,26 @@ if [ $SHOW_COLORED_PROMPT = "yes" ] ; then
   MY_HOSTNAME=`echo $HOSTNAME | awk -F'.' '{print tolower($1)}'`
   MY_SSH_CLIENT=`echo $SSH_CLIENT | awk '{print $1}'`
 
-  if [ -n "$MY_SSH_CLIENT" ] ; then
-		#hostname in green
-    MY_HOSTNAME="\[\e[0;32m\]@${MY_HOSTNAME}\[\e[0m\]"
+	#get color codes from display_terminal_colors.hs
+	 _GREEN="\[\e[38;5;22m\]"
+	_RED="\[\e[38;5;196m\]"
+	_GREY="\[\e[38;5;235m\]"
+	_DARK_YELLOW="\[\e[38;5;58m\]"
+	_END_COLOR="\[\e[0m\]"
+
+	#default prompt color for local sessions
+	_COLOR="${_GREY}"
+
+	if [ -n "$MY_SSH_CLIENT" ] ; then
+    MY_HOSTNAME="${MY_HOSTNAME}"
+		#this is SSH session, show user and host names in green
+		_COLOR="${_GREEN}"
   else
     if [ -n "$MY_IP" ] ; then
       MY_HOSTNAME="${MY_IP}"
     fi
-		#this is local to hostname in grey
-    MY_HOSTNAME="\[\e[0;235m\]@${MY_HOSTNAME}\[\e[0m\]"
   fi
 
-  export PS1="\[\e[0;32m\]${MY_USERNAME}\[\e[0m\]${MY_HOSTNAME}: \[\e[0;33m\]\w\[\e[0m\] $ "
-  export SUDO_PS1="\[\e[0;31m\]${MY_USERNAME}\[\e[0m\]${MY_HOSTNAME}: \[\e[0;33m\]\w\[\e[0m\] # "
+  export PS1="${_COLOR}[${MY_USERNAME}@${MY_HOSTNAME}]: ${_DARK_YELLOW}\w $ ${_END_COLOR}"
+  export SUDO_PS1="${_RED}${MY_USERNAME}@${MY_HOSTNAME}: \w # ${_END_COLOR}"
 fi

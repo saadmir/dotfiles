@@ -1,0 +1,16 @@
+extends javascript
+extends ../bundle/vim-snippets/UltiSnips/xml
+extends ../bundle/vim-snippets/UltiSnips/xhtml
+extends ../bundle/vim-snippets/UltiSnips/html
+extends ../bundle/vim-snippets/UltiSnips/css
+extends ../bundle/vim-snippets/UltiSnips/json
+
+snippet fmatter
+---
+title: ${1:Meet UltiSnips}
+date: ${2:`date +%Y-%m-%d`}
+tags: $3
+---
+$1
+$0
+endsnippet
