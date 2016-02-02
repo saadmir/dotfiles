@@ -53,13 +53,16 @@ if [ $SHOW_COLORED_PROMPT = "yes" ] ; then
   MY_SSH_CLIENT=`echo $SSH_CLIENT | awk '{print $1}'`
 
   if [ -n "$MY_SSH_CLIENT" ] ; then
-    MY_HOSTNAME="${MY_HOSTNAME}[SSH]"
+		#hostname in green
+    MY_HOSTNAME="\[\e[0;32m\]@${MY_HOSTNAME}\[\e[0m\]"
   else
     if [ -n "$MY_IP" ] ; then
       MY_HOSTNAME="${MY_IP}"
     fi
+		#this is local to hostname in grey
+    MY_HOSTNAME="\[\e[0;235m\]@${MY_HOSTNAME}\[\e[0m\]"
   fi
 
-  export PS1="\[\e[0;32m\][${MY_USERNAME}@${MY_HOSTNAME}]:\[\e[0m\] \[\e[0;33m\]\w\[\e[0m\] $ "
-  export SUDO_PS1="\[\e[0;31m\][${MY_USERNAME}@${MY_HOSTNAME}]:\[\e[0m\] \[\e[0;33m\]\w\[\e[0m\] # "
+  export PS1="\[\e[0;32m\]${MY_USERNAME}\[\e[0m\]${MY_HOSTNAME}: \[\e[0;33m\]\w\[\e[0m\] $ "
+  export SUDO_PS1="\[\e[0;31m\]${MY_USERNAME}\[\e[0m\]${MY_HOSTNAME}: \[\e[0;33m\]\w\[\e[0m\] # "
 fi
