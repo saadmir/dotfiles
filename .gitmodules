@@ -28,9 +28,6 @@
 [submodule "vim/bundle/vim-airline"]
 	path = vim/bundle/vim-airline
 	url = https://github.com/saadmir/vim-airline.git
-[submodule "vim/bundle/vim-javascript"]
-	path = vim/bundle/vim-javascript
-	url = https://github.com/saadmir/vim-javascript.git
 [submodule "vim/bundle/vim-snippets"]
 	path = vim/bundle/vim-snippets
 	url = https://github.com/saadmir/vim-snippets.git
@@ -49,6 +46,9 @@
 [submodule "vim/bundle/ultisnips"]
 	path = vim/bundle/ultisnips
 	url = git@github.com:saadmir/ultisnips.git
-[submodule "vim/bundle/tern_for_vim"]
-	path = vim/bundle/tern_for_vim
-	url = git@github.com:saadmir/tern_for_vim.git
+[submodule "vim/bundle/unite.vim"]
+	path = vim/bundle/unite.vim
+	url = git@github.com:saadmir/unite.vim.git
+[submodule "vim/bundle/vimproc.vim"]
+	path = vim/bundle/vimproc.vim
+	url = git@github.com:saadmir/vimproc.vim.git

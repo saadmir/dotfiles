@@ -23,3 +23,4 @@ if [ -d "$HOME/local" ] && [ -d "$HOME/local/bin" ] && [[ ":$PATH:" != *":$HOME/
 	export PATH=$HOME/local/bin:$PATH
 fi
 
+alias sgrep="grep --exclude=*min.js --exclude=*min*js --exclude-dir=TLXJS --exclude-dir=node_modules --exclude-dir=test --exclude-dir=dist --exclude-dir=temp --color=auto "
