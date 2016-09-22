@@ -1,0 +1,108 @@
+{
+  "extends": "airbnb-base",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": false
+    }
+  },
+
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+
+  "globals": {
+    "Promise": true,
+    "Syslog": true,
+    "root_dir": true,
+    "$config": true,
+    "module": true,
+    "require": true,
+    "Ember": true,
+    "Auth": true,
+    "Balanced": true,
+    "balanced": true,
+    "DS": true,
+    "ENV": true,
+    "_": true,
+    "Testing": true,
+    "Raven": true,
+    "prettyPrint": true
+  },
+
+  "rules": {
+
+    #if turned on this will dis-allow use of var, only const and let will be allowed
+    "no-var": ["off"],
+
+    #functions must be named
+    "func-names": ["error"],
+
+    #Block must not be padded by blank lines
+    "padded-blocks": ['warn'],
+
+    #Expected variable declaration to be on a new line
+    one-var-declaration-per-line: ["error"],
+
+    #Split 'var' declarations into multiple statements
+    "one-var": ["error"],
+
+    #allow variables to be NOT camelcase
+    camelcase: ["off", { properties: 'never' }],
+
+    #no trailing comma allowed after last item in array and object
+    "comma-dangle": ["off", "always"],
+
+    #disallow variables names starting with _, except for _header and _s
+    "no-underscore-dangle": ["error", { "allow": ["_headers", "_s"] }],
+
+    #disallow multiple spaces
+    "no-multi-spaces": ['warn', { exceptions: { "VariableDeclarator": true } }],
+
+    #change violation of line length to warning, allowed max line length is 80
+    max-len: ['warn', { "code": 200, "ignoreTrailingComments": true, "ignoreComments": true, "ignoreUrls": true }],
+
+    #warn if a function expression can be replaced with arrow function
+    "prefer-arrow-callback": ['off'],
+
+    #function parameter value changed
+    "no-param-reassign": ['off'],
+
+    #warn if '==' is used instead of '==='
+    "eqeqeq": ['warn'],
+
+    #Require Radix Parameter
+    "radix": ['warn', "as-needed"],
+
+    #allow require statements to be anywhere in the code
+    "global-require": ['off'],
+
+    #Disallow mixed spaces and tabs for indentation
+    "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+
+    #Do not nest ternary expressions
+    "no-nested-ternary": ['warn'],
+
+    #The body of a for-in should be wrapped in an if statement to filter
+    #unwanted properties from the prototype
+    "guard-for-in": ['warn'],
+
+    #Treat var as Block Scoped
+    "block-scoped-var": ['warn'],
+
+    #warn if a statement should be dot notation
+    "dot-notation": ['warn'],
+
+    #warn if var statement is not at top
+    "vars-on-top": ["warn"],
+
+    #Suggest using template literals instead of string concatenation
+    "prefer-template": ["off"],
+
+    #require a newline after each call in a method chain
+    "newline-per-chained-call": ["off"],
+
+    "import/no-unresolved": ['warn']
+  }
+}
