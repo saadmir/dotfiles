@@ -276,32 +276,6 @@ autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
 let g:CommandTAcceptSelectionMap = '<,-q>'
 let g:CommandTAcceptSelectionTabMap = '<CR>'
 
-"let g:ctrlp_prompt_mappings = {
-"    \ 'AcceptSelection("e")': ['<,-q>'],
-"    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-"    \ }
-
-"let g:nodejs_complete_config = {
-    "\  'js_compl_fn': 'jscomplete#CompleteJS',
-    "\  'max_node_compl_len': 15
-    "\}
-"autocmd FileType javascript
-  "\ :setl omnifunc=jscomplete#CompleteJS
-
-"au FileType javascript set dictionary+=$HOME/.vim/dict/vim-node/dict/node.dict
-"highlight Pmenu ctermfg=yellow ctermbg=darkgreen
-
-"jsbeautifer related
-autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-" for html
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-" for css or scss
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-
-"autocmd BufWritePost,FileWritePost *.js !jshint <afile>
-"inoremap <silent> <F9> :JSHint <cr>
-"nnoremap <silent> <F9> :JSHint <cr>
-
 inoremap <silent><leader>n :lnext<cr>
 inoremap <silent><leader>p :lprev<cr>
 nnoremap <silent><leader>n :lnext<cr>
@@ -361,58 +335,4 @@ set t_ut=
 set clipboard=unnamed
 
 set completeopt-=preview
-
-
-"snippets ultisnip setup
-"Plugin 'SirVer/ultisnips'
-
-" Snippets are separated from the engine. Add this if you want them:
-"Plugin 'honza/vim-snippets'
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-" If you want :UltiSnipsEdit to split your window.
-" let g:UltiSnipsEditSplit="vertical"
-
-let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
-let g:ycm_min_num_of_chars_for_completion = 5
-let g:ycm_min_num_identifier_candidate_chars = 5
-let g:ycm_collect_identifiers_from_tags_files = 1
-nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>                " turn off YCM
-nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>                "turn on YCM
-
-let g:UltiSnipsSnippetDirectories=["my-snippets"]
-
-"autocmd BufRead,BufNewFile **/blackbird/*.xml :UltiSnipsAddFiletypes tlx
-autocmd BufRead,BufNewFile **/blackbird/*.xml :call TLXFile()
-
-function! TLXFile()
-	set ft=javascript
-	:UltiSnipsAddFiletypes tlx
-:endfunction
-
-let g:ignore_patterns = [' ', 'test', 'dist', 'TLXJS', '*min.js', 'node_modules', 'temp']
-let g:unite_source_grep_default_opts_list = [' ', 'hidden', 'line-numbers', 'nocolor', 'nogroup']
-
-let g:ag_working_path_mode="r"
-let g:unite_enable_start_insert=1
-let g:unite_prompt='» '
-let g:unite_source_grep_command = 'ag'
-let g:unite_source_grep_default_opts = join(unite_source_grep_default_opts_list, ' --') . join(ignore_patterns,' --ignore ')
-"let g:unite_source_grep_default_opts = ' --column --hidden --line-numbers --nocolor --nogroup --smart-case --ignore test --ignore dist --ignore TLXJS --ignore *min.js --ignore node_modules --ignore temp '
-let g:unite_source_grep_recursive_opt = ''
-
-let g:unite_source_rec_max_cache_files=50000
-let g:unite_source_rec_async_command=['ag', '--nocolor', '--nogroup', '--hidden', '--follow', '-g', '']
-
-" uncomment this to use ,f for deleting Unite cache, should also delete the ~/.cache directory
-nnoremap <Leader>f <Plug>(unite_redraw)
-
-"nnoremap <Leader>f :Unite -start-insert -buffer-name=files -default-action=tabopen file<CR>
-nnoremap <C-p>    :<C-u>Unite -start-insert -buffer-name=files -silent -default-action=tabopen file_rec/async:!<cr>
-nnoremap <space>/ :<C-u>Unite -start-insert -buffer-name=ag    -silent -default-action=tabopen grep:!<cr>
 
