@@ -8,12 +8,12 @@ if [ $SHOW_COLORED_PROMPT = "yes" ] ; then
   MY_PS1=""
   MY_USERNAME=`whoami | awk '{print tolower($0)}'`
 
-  if [ -n $(command -v ip) ] ; then
-    export WAN_IP=`ip route get 8.8.8.8 | awk 'NR==1 {print $NF}'`;
-  fi
-  if [ -z "${WAN_IP}" ] && [ -n $(command -v ipconfig) ] ; then
-    export WAN_IP=`ipconfig getifaddr en0`;
-  fi
+#  if [ -n $(command -v ip) ] ; then
+#    export WAN_IP=`ip route get 8.8.8.8 | awk 'NR==1 {print $NF}'`;
+#  fi
+#  if [ -z "${WAN_IP}" ] && [ -n $(command -v ipconfig) ] ; then
+#    export WAN_IP=`ipconfig getifaddr en0`;
+#  fi
 
 
   #this is mac
@@ -42,11 +42,11 @@ if [ $SHOW_COLORED_PROMPT = "yes" ] ; then
     done
   fi
 
-  echo "WAN_IP: ${WAN_IP}";
-  echo "LAN_IP: ${LAN_IP}";
+#  echo "WAN_IP: ${WAN_IP}";
+#  echo "LAN_IP: ${LAN_IP}";
 
-  if [ -n "${WAN_IP}" ] ; then MY_IP="${WAN_IP}"; fi
-  if [ -n "${LAN_IP}" ] ; then MY_IP="${LAN_IP}"; fi
+ # if [ -n "${WAN_IP}" ] ; then MY_IP="${WAN_IP}"; fi
+  if [ -n "${LAN_IP}" ] ; then export MY_IP="${LAN_IP}"; fi
 
 
   MY_HOSTNAME=`echo $HOSTNAME | awk -F'.' '{print tolower($1)}'`
