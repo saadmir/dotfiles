@@ -56,7 +56,7 @@ if [ $SHOW_COLORED_PROMPT = "yes" ] ; then
 	 _GREEN="\[\e[38;5;22m\]"
 	_RED="\[\e[38;5;196m\]"
 	_GREY="\[\e[38;5;235m\]"
-	_DARK_YELLOW="\[\e[38;5;58m\]"
+	_DARK_YELLOW="\[\e[38;5;222m\]"
 	_END_COLOR="\[\e[0m\]"
 
 	#default prompt color for local sessions
