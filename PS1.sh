@@ -55,7 +55,7 @@ if [ $SHOW_COLORED_PROMPT = "yes" ] ; then
 	#get color codes from display_terminal_colors.hs
 	 _GREEN="\[\e[38;5;22m\]"
 	_RED="\[\e[38;5;196m\]"
-	_GREY="\[\e[38;5;235m\]"
+	_GREY="\[\e[38;5;244m\]"
 	_DARK_YELLOW="\[\e[38;5;222m\]"
 	_END_COLOR="\[\e[0m\]"
 
