@@ -313,6 +313,7 @@ set listchars=tab:▸\ ,trail:·      " show · for trailing space, \ \ for trai
 set listchars+=extends:>
 set listchars+=precedes:<
 set list                            " show hidden characters
+
 " set color of hidden characters to grey
 hi SpecialKey ctermfg=238 " guifg=238
 
