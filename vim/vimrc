@@ -314,7 +314,7 @@ set listchars+=extends:>
 set listchars+=precedes:<
 set list                            " show hidden characters
 " set color of hidden characters to grey
-hi SpecialKey ctermfg=238 guifg=238
+hi SpecialKey ctermfg=238 " guifg=238
 
 let g:airline_section_c = '%F'
 "let g:airline#extensions#tabline#enabled = 1
