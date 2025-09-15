@@ -6,8 +6,6 @@ sudo apt-get update && sudo apt-get install tmux vim
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    
-bash <(curl -L zellij.dev/launch)
 
 if [ -d "$HOME/dotfiles" ] ; then
   echo "dotfiles already exists. skipping git clone"
@@ -28,3 +26,5 @@ fi
 
 EOT
 fi
+
+bash <(curl -L zellij.dev/launch)
