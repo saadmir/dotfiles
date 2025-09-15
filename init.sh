@@ -24,19 +24,19 @@ fi
 vim +PlugInstall +qall
 
 # After PlugInstall, run the compiler
-cd ~/.vim/plugged/YouCompleteMe
-python3 install.py --all
-python3 install.py --clangd-completer --ts-completer --javascript-completer
-python3 install.py --clangd-completer --ts-completer --typescript-completer
-python3 install.py --clangd-completer --ts-completer --rust-completer
+# cd ~/.vim/plugged/YouCompleteMe
+# python3 install.py --all
+# python3 install.py --clangd-completer --ts-completer --javascript-completer
+# python3 install.py --clangd-completer --ts-completer --typescript-completer
+# python3 install.py --clangd-completer --ts-completer --rust-completer
 
 # Install FZF system-wide for better integration
-~/.vim/plugged/fzf/install --bin
+#~/.vim/plugged/fzf/install --bin
 
-if [[ ":$PATH:" != *":$HOME/.vim/plugged/fzf/bin:"* ]]; then
-  echo 'export PATH="$PATH:$HOME/.vim/plugged/fzf/bin"' >> ~/.bashrc
+#if [[ ":$PATH:" != *":$HOME/.vim/plugged/fzf/bin:"* ]]; then
+#  echo 'export PATH="$PATH:$HOME/.vim/plugged/fzf/bin"' >> ~/.bashrc
   # export PATH="/your/directory:$PATH"
-fi
+#fi
 
 # if [ -d "$HOME/dotfiles" ] && [ -f "$HOME/dotfiles/profile.sh" ]  ; then
 # cat <<EOT >> $HOME/.profile
@@ -52,7 +52,7 @@ fi
 
 if ! command -v zellij >/dev/null 2>&1; then
   echo "Zellij not found. Installing Zellij..."
-  cargo install zellij
+  # cargo install zellij
 fi
 
 if ! command -v nvm >/dev/null 2>&1; then
@@ -60,4 +60,8 @@ if ! command -v nvm >/dev/null 2>&1; then
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 fi
 
-  source ~/.bashrc
+source ~/.bashrc
+
+nvm use --lts
+npm install -g typescript typescript-language-server
+
