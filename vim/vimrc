@@ -1,339 +1,153 @@
-set nocompatible                    " full vim
-syntax enable                       " enable syntax highlighting
-set encoding=utf8                   " utf8 default encoding
+" ========================
+" Basic Vim Configuration
+" ========================
+set nocompatible            " Disable vi compatibility
+filetype off                " Required for vim-plug
 
-call pathogen#infect()              " load pathogen
+" ========================
+" vim-plug Plugin Manager
+" ========================
+call plug#begin('~/.vim/plugged')
+
+" Add plugins here
+Plug 'tpope/vim-sensible'   " Sensible defaults
+Plug 'preservim/nerdtree'   " File explorer
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'     " Fuzzy finder
+Plug 'airblade/vim-gitgutter' " Git diff indicators
+Plug 'tpope/vim-fugitive'   " Git integration
+Plug 'vim-airline/vim-airline' " Status line
+Plug 'vim-airline/vim-airline-themes'
+Plug 'preservim/nerdcommenter' " Easy commenting
+Plug 'sheerun/vim-polyglot' " Language pack
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' } " Auto-completion
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' } " Markdown preview
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense engine
+Plug 'dense-analysis/ale'    " Asynchronous linting
+Plug 'NLKNguyen/papercolor-theme' " PaperColor theme
+
+" Color schemes
+Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
+Plug 'arcticicestudio/nord-vim'
+
+call plug#end()
+
+" ========================
+" Basic Settings
+" ========================
+syntax on
 filetype plugin indent on
 
-noremap , \
-let mapleader = ","
+set number                  " Show line numbers
+set relativenumber          " Show relative numbers
+set tabstop=4               " Number of spaces that a <Tab> in the file counts for
+set shiftwidth=4            " Number of spaces to use for each step of (auto)indent
+set expandtab               " Use spaces instead of tabs
+set smartindent             " Smart autoindenting
+set autoindent              " Auto indent
+set cursorline              " Highlight current line
+set showmatch               " Show matching brackets
+set incsearch               " Incremental search
+set hlsearch                " Highlight search results
+set ignorecase              " Ignore case when searching
+set smartcase               " Override ignorecase if search contains uppercase
+set backspace=indent,eol,start " Make backspace work normally
+set encoding=utf-8          " Set encoding to UTF-8
+set fileencoding=utf-8      " Set file encoding to UTF-8
+set mouse=a                 " Enable mouse support
+set laststatus=2            " Always show status line
+set updatetime=100          " Faster update time for gitgutter
 
-set t_Co=256
+" Create backup directories
+silent !mkdir -p ~/.vim/backup
+silent !mkdir -p ~/.vim/swap
+silent !mkdir -p ~/.vim/undo
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
 
-" syntax highlighting
-syntax on
-color xoria256
+" ========================
+" Plugin Configurations
+" ========================
 
-set autochdir
+" NERDTree
+map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-set scrolloff=3                     " show 3 lines of context around the cursor
-set autoread                        " set to auto read when a file is changed from the outside
-set mouse=a                         " allow for full mouse support
-set autowrite
-set showcmd                         " show typed commands
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'onedark'
 
-set wildmenu                        " turn on WiLd menu
-set wildmode=list:longest,list:full " activate TAB auto-completion for file paths
-set wildignore+=*.o,.git,.svn,node_modules
+" Gruvbox color scheme
+colorscheme gruvbox
+set background=dark
 
-set ruler                           " always show current position
-set backspace=indent,eol,start      " set backspace config, backspace as normal
-set nomodeline                      " security
+" FZF
+nnoremap <C-p> :Files<CR>
+nnoremap <C-f> :Rg<CR>
 
-set hlsearch                        " highlight search things
-set incsearch                       " go to search results as typing
-set smartcase                       " but case-sensitive if expression contains a capital letter.
-set ignorecase                      " ignore case when searching
-set gdefault                        " assume global when searching or substituting
-set magic                           " set magic on, for regular expressions
-set showmatch                       " show matching brackets when text indicator is over them
+" GitGutter
+let g:gitgutter_sign_added = '++'
+let g:gitgutter_sign_modified = '~~'
+let g:gitgutter_sign_removed = '--'
 
-set lazyredraw                      " don't redraw screen during macros, faster
-set ttyfast                         " improves redrawing for newer computers
-set fileformats=unix,mac,dos
+" NERDCommenter
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
 
-set nobackup                        " prevent backups of files, since using vcs
-set nowritebackup
-set noswapfile
+" PaperColor theme"
+set background=light
+colorscheme PaperColor
 
-"Show line number
-set numberwidth=3
-set number
+" ========================
+" Key Mappings
+" ========================
+let mapleader = " "        " Set leader key to space
 
-set et
-set textwidth=0
-set nowrap
+" Clear search highlights
+nnoremap <leader><space> :nohlsearch<CR>
 
-set smarttab
-set autoindent                      " set automatic code indentation
-set hidden                          " allow background buffers w/out writing
-
-set cursorline                      " highlight current line
-"set colorcolumn=79                 " show a right margin column
-"hi ColorColumn ctermbg=black guibg=black
-
-"Higlight current line only in insert mode
-"autocmd InsertLeave * set nocursorline
-"autocmd InsertEnter * set cursorline
-
-
-set spelllang=en,es                 " set spell check language
-set noeb novb t_vb=                   " disable audio and visual bells
-
-set formatoptions=qrn1
-
-" FOLDING
-"set nofoldenable                " disable folding
-set foldenable                  " enable folding
-set foldmethod=syntax           " most files are evenly indented
-" set foldlevel=99
-"press Space to toggle the current fold open/closed. However, if the cursor is not in a fold, move to the right (the default behavior)
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
-nnoremap <silent> <Space><Space> zR<CR>
-vnoremap <Space> zf
-let javaScript_fold=1
-
-
-"navigation
-"between tabs
-nnoremap <leader>l gt
-nnoremap <leader>j gt
-nnoremap <leader>k gT
-nnoremap <leader>h gT
-
-"left panel for openning NERDTree"
-"nnoremap <silent><leader>n :NERDTreeToggle<cr>
-nnoremap <silent> <F10> :NERDTreeToggle<cr>
-noremap <silent> <F10> :NERDTreeToggle<cr>
-"let NERDTreeShowHidden=1
-"inoremap <silent><leader>n :NERDTreeToggle<cr>
-
-"an additional key mapping for pressing ESCAPE key
-inoremap jj <ESC>
-
-"map left right up down keys to do the same if done with CTRL
+" Better window navigation
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-"map ; to : too
-nnoremap ; :
+" Save and quit shortcuts
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>x :x<CR>
 
-"split screen vertically
-"nnoremap <leader>w <C-w>v<C-w>l
+" Tab navigation
+nnoremap <leader>tn :tabnew<CR>
+nnoremap <leader>tc :tabclose<CR>
+nnoremap <leader>tl :tabnext<CR>
+nnoremap <leader>th :tabprev<CR>
 
-"fold the tag in HTML files
-"nnoremap <leader>ft Vatzf
+" ========================
+" Autocommands
+" ========================
+augroup vimrc
+    autocmd!
+    " Auto source vimrc when saved
+    autocmd BufWritePost .vimrc source %
+    " Auto remove trailing whitespace
+    autocmd BufWritePre * %s/\s\+$//e
+augroup END
 
-"paste the selected text and select it too
-nnoremap <C-v> V`]
-
-set showmode
-
-"Show Buffer list
-set wildchar=<Tab> wildmenu wildmode=list:longest
-set wildcharm=<C-Z>
-
-set path=.,,**,~
-
-" indent visual selected code without unselecting and going back to normal mode
-vmap > >gv
-vmap < <gv
-
-"add a \v before each search string to turn off VIM specific regex and use
-"standard regex
-nnoremap / /\v
-vnoremap / /\v
-nnoremap <leader><space> :noh<cr>
-set sessionoptions=blank,buffers,curdir,folds,globals,help,localoptions,options,resize,tabpages,winsize,winpos
-
-set guioptions+=a
-
-" only display scroll bar on left and only when there is need for it
-" set guioptions-=r
-set guioptions-=L
-set guioptions-=l
-set guioptions+=R
-
-
-" insert path of current file into a command
-cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-
-" fast editing of the .vimrc
-nmap <silent> <leader>ev :e $MYVIMRC<cr>
-nmap <silent> <leader>sv :so $MYVIMRC<cr>
-
-" allow saving when you forgot sudo
-cmap w!! w !sudo tee % >/dev/null
-
-" Unimpaired
-" bubble single lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-" bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
-" all my .tpl files ARE html
-au BufNewFile,BufRead *.tpl     :set ft=html
-
-" .mu .hogan .hjs files are .mustache files
-au BufNewFile,BufRead *.hjs     :set ft=mustache
-au BufNewFile,BufRead *.mu      :set ft=mustache
-au BufNewFile,BufRead *.hogan   :set ft=mustache
-
-" JavaScript
-au BufRead,BufNewFile *.json set ft=javascript
-
-" au BufRead,BufNewFile *.php set indentexpr= | set smartindent
-au BufRead,BufNewFile *.phps set filetype=php
-
-" **whitespace highlighting and stripping
-"highlight trailing white spaces
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-
-if exists("*TrimTrailingWhiteSpaces")
-else
-  function TrimTrailingWhiteSpaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
-  :endfunction
-endif
-
-autocmd FileWritePre * :call TrimTrailingWhiteSpaces()
-autocmd FileAppendPre * :call TrimTrailingWhiteSpaces()
-autocmd FilterWritePre * :call TrimTrailingWhiteSpaces()
-autocmd BufWritePre * :call TrimTrailingWhiteSpaces()
-
-"" STATUS LINE
-"let g:Powerline_stl_path_style = 'full'
-set laststatus=2  " always show status line
-
-function! FileSize()
-    let bytes = getfsize(expand("%:p"))
-    if bytes <= 0
-        return ""
-    endif
-    if bytes < 1024
-        return bytes . " Bytes"
+" ========================
+" Functions
+" ========================
+" Toggle relative numbers
+function! ToggleRelativeNumber()
+    if &relativenumber
+        set norelativenumber
     else
-        return (bytes / 1024) . "kB"
+        set relativenumber
     endif
 endfunction
-
-" Rename tabs to show tab number.
-" (Based on http://stackoverflow.com/questions/5927952/whats-implementation-of-vims-default-tabline-function)
-if exists("+showtabline")
-    function! MyTabLine()
-        let s = ''
-        let wn = ''
-        let t = tabpagenr()
-        let i = 1
-        while i <= tabpagenr('$')
-            let buflist = tabpagebuflist(i)
-            let winnr = tabpagewinnr(i)
-            let s .= '%' . i . 'T'
-            let s .= (i == t ? '%1*' : '%2*')
-            let s .= ' '
-            let wn = tabpagewinnr(i,'$')
-
-            let s .= '%#TabNum#'
-            "let s .= i
-            " let s .= '%*'
-            let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
-            let bufnr = buflist[winnr - 1]
-            let file = bufname(bufnr)
-            let buftype = getbufvar(bufnr, 'buftype')
-            if buftype == 'nofile'
-                if file =~ '\/.'
-                    let file = substitute(file, '.*\/\ze.', '', '')
-                endif
-            else
-                let file = fnamemodify(file, ':p:t')
-            endif
-            if file == ''
-                let file = '[No Name]'
-            endif
-            let s .= i . ' ' . file . '  '
-            let i = i + 1
-        endwhile
-        let s .= '%T%#TabLineFill#%='
-        let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
-        return s
-    endfunction
-    set showtabline=2
-    set tabline=%!MyTabLine()
-    set showtabline=1
-    highlight TabNum      ctermfg=240 ctermbg=NONE cterm=NONE
-    highlight TabLineFill ctermfg=240 ctermbg=NONE cterm=NONE
-    highlight TabLine     ctermfg=240 ctermbg=NONE cterm=NONE
-    highlight TabLineSel  ctermfg=255 ctermbg=NONE cterm=NONE
-endif
-
-set guitablabel=%N/\ %t\ %M
-
-" move tabs to the end for new, single buffers (exclude splits)
-autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
-
-let g:CommandTAcceptSelectionMap = '<,-q>'
-let g:CommandTAcceptSelectionTabMap = '<CR>'
-
-inoremap <silent><leader>n :lnext<cr>
-inoremap <silent><leader>p :lprev<cr>
-nnoremap <silent><leader>n :lnext<cr>
-nnoremap <silent><leader>p :lprev<cr>
-
-" [04/21/2015] added for syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+='%F'
-set statusline+=%*
-
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-"nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
-"inoremap <silent> <F9> :SyntasticCheck<CR> :SyntasticToggleMode<CR>
-let g:syntastic_javascript_checkers = ['jshint', 'jscs']
-inoremap <silent><F9> :SyntasticCheck<CR> :lclose<CR>
-nnoremap <silent><F9> :SyntasticCheck<CR> :lclose<CR>
-
-inoremap <silent><c-Down> :lnext<cr>
-inoremap <silent><c-Up> :lprevious<cr>
-nnoremap <silent><c-Down> :lnext<cr>
-nnoremap <silent><c-Up> :lprevious<cr>
-
-nnoremap <silent> <Tab> :NERDTreeToggle<cr>
-noremap <silent> <Tab> :NERDTreeToggle<cr>
-
-set listchars=tab:▸\ ,trail:·      " show · for trailing space, \ \ for trailing tab
-"set listchars=tab:\ \ ,trail:·    " show · for trailing space, \ \ for trailing tab
-"set listchars=tab:▸\ ,eol:¬
-set listchars+=extends:>
-set listchars+=precedes:<
-set list                            " show hidden characters
-
-" set color of hidden characters to grey
-hi SpecialKey ctermfg=238 " guifg=238
-
-let g:airline_section_c = '%F'
-"let g:airline#extensions#tabline#enabled = 1
-
-" autocompelte popup background grey, text in yellow
-highlight Pmenu ctermbg=238 ctermfg=226
-
-set shiftwidth=2                    " set tab width
-set softtabstop=2
-set tabstop=2
-"set noexpandtab
-set expandtab
-
-let g:nerdtree_tabs_open_on_gui_startup = 0
-
-set t_ut=
-
-set clipboard=unnamed
-
-set completeopt-=preview
-
+nnoremap <leader>rn :call ToggleRelativeNumber()<CR>
