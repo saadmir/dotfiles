@@ -2,7 +2,9 @@
 
 cd $HOME
 
-sudo apt-get update && sudo apt-get install tmux vim zellij
+sudo apt update
+sudo apt install build-essential cmake python3-dev nodejs npm ripgrep silversearcher-ag fzf
+sudo apt install tmux vim zellij 
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -17,6 +19,23 @@ fi
 
 if [ -d "$HOME/dotfiles" ] && [ -d "$HOME/dotfiles/tmux.conf" ] && [ ! -f "$HOME/.tmux.conf" ] ; then
   ln -s $HOME/dotfiles/tmux.conf $HOME/.tmux.conf
+fi
+
+vim +PlugInstall +qall
+
+# After PlugInstall, run the compiler
+cd ~/.vim/plugged/YouCompleteMe
+python3 install.py --all
+python3 install.py --clangd-completer --ts-completer --javascript-completer
+python3 install.py --clangd-completer --ts-completer --typescript-completer
+python3 install.py --clangd-completer --ts-completer --rust-completer
+
+# Install FZF system-wide for better integration
+~/.vim/plugged/fzf/install --bin
+
+if [[ ":$PATH:" != *":$HOME/.vim/plugged/fzf/bin:"* ]]; then
+  echo 'export PATH="$PATH:$HOME/.vim/plugged/fzf/bin"' >> ~/.bashrc
+  # export PATH="/your/directory:$PATH"
 fi
 
 # if [ -d "$HOME/dotfiles" ] && [ -f "$HOME/dotfiles/profile.sh" ]  ; then
@@ -40,3 +59,5 @@ if ! command -v nvm >/dev/null 2>&1; then
   echo "nvm not found. Installing nvm..."
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 fi
+
+  source ~/.bashrc
