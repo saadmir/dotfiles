@@ -26,9 +26,6 @@ fi
 #   . $HOME/dotfiles/profile.sh
 # fi
 
-EOT
-fi
-
 if ! command -v rustc >/dev/null 2>&1; then
   echo "Rust not found. Installing Rust..."
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
