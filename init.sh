@@ -13,20 +13,41 @@ else
   git clone --recursive https://github.com/saadmir/dotfiles.git
 fi
 
-ln -s $HOME/dotfiles/vim $HOME/.vim
 ln -s $HOME/dotfiles/vim/vimrc $HOME/.vimrc
-ln -s $HOME/dotfiles/tmux.conf $HOME/.tmux.conf
 
-if [ -d "$HOME/dotfiles" ] && [ -f "$HOME/dotfiles/profile.sh" ]  ; then
-cat <<EOT >> $HOME/.profile
-
-if [ -d "$HOME/dotfiles" ] && [ -f "$HOME/dotfiles/profile.sh" ]  ; then
-  . $HOME/dotfiles/profile.sh
+if [ -d "$HOME/dotfiles" ] && [ -d "$HOME/dotfiles/vim" ] && [ ! -d "$HOME/.vim" ] ; then
+  ln -s $HOME/dotfiles/vim $HOME/.vim
 fi
+
+if [ -d "$HOME/dotfiles" ] && [ -d "$HOME/dotfiles/vim" ] && [ -f "$HOME/dotfiles/vim/vimrc" ] && [ ! -f "$HOME/.vimrc" ] ; then
+  ln -s $HOME/dotfiles/vim $HOME/.vim
+fi
+
+if [ -d "$HOME/dotfiles" ] && [ -d "$HOME/dotfiles/tmux.conf" ] && [ ! -f "$HOME/.tmux.conf" ] ; then
+  ln -s $HOME/dotfiles/tmux.conf $HOME/.tmux.conf
+fi
+
+# if [ -d "$HOME/dotfiles" ] && [ -f "$HOME/dotfiles/profile.sh" ]  ; then
+# cat <<EOT >> $HOME/.profile
+
+# if [ -d "$HOME/dotfiles" ] && [ -f "$HOME/dotfiles/profile.sh" ]  ; then
+#   . $HOME/dotfiles/profile.sh
+# fi
 
 EOT
 fi
 
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+if ! command -v rustc >/dev/null 2>&1; then
+  echo "Rust not found. Installing Rust..."
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
 
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+if ! command -v zellij >/dev/null 2>&1; then
+  echo "Zellij not found. Installing Zellij..."
+  cargo install zellij
+fi
+
+if ! command -v nvm >/dev/null 2>&1; then
+  echo "nvm not found. Installing nvm..."
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+fi
